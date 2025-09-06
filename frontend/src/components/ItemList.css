@@ -1,0 +1,9 @@
+/* frontend/src/components/ItemList.css */
+.item-list {
+  display: grid;
+  /* Create as many 300px columns as can fit, with a minimum size */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px; /* Spacing between cards */
+  justify-items: center;
+  padding: 2rem 0;
+}

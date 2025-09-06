@@ -1,17 +1,33 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "EcoFinds - Sustainable Second-Hand Marketplace Backend",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "seed": "node seed.js",
+    "migrate": "node migrations/run-migrations.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["sustainability", "ecommerce", "second-hand", "marketplace"],
+  "author": "Your Name",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
-    "express": "^5.1.0",
-    "sqlite3": "^5.1.7"
+    "dotenv": "^16.3.1",
+    "express": "^4.19.2",
+    "express-validator": "^7.0.1",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "sqlite3": "^5.1.7",
+    "winston": "^3.10.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.2",
+    "supertest": "^6.3.3"
   }
 }

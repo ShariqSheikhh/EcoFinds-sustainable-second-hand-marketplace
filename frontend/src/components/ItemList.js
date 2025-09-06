@@ -1,17 +1,11 @@
-// src/components/ItemList.js
+// frontend/src/components/ItemList.js
 import React from 'react';
 import ItemCard from './ItemCard';
-
-const listStyle = {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center'
-};
+import './ItemList.css'; // Import the new CSS file
 
 function ItemList({ items }) {
-    // The component receives an array of 'items' as a prop
     return (
-        <div style={listStyle}>
+        <div className="item-list">
             {items.map(item => (
                 <ItemCard key={item.id} item={item} />
             ))}

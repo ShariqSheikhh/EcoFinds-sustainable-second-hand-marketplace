@@ -1,28 +1,32 @@
-// src/components/ItemCard.js
+// frontend/src/components/ItemCard.js
 import React from 'react';
-
-// Some basic styling for the card
-const cardStyle = {
-    border: '1px solid #ddd',
-    borderRadius: '8px',
-    padding: '16px',
-    margin: '16px',
-    width: '300px',
-    boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
-};
-
-const titleStyle = {
-    fontSize: '1.25rem',
-    fontWeight: 'bold'
-};
+import './ItemCard.css';
 
 function ItemCard({ item }) {
-    // The component receives an 'item' object as a prop
+    if (!item) {
+        return null;
+    }
+
+    const handleBuyClick = () => {
+        // This is a placeholder for the demo. A real app would have a checkout or messaging system.
+        alert('To purchase, please contact the seller at: seller@example.com');
+    };
+
     return (
-        <div style={cardStyle}>
-            <p style={titleStyle}>{item.title}</p>
-            <p>${item.price}</p>
-            <p>{item.description}</p>
+        <div className="item-card">
+            <img 
+                src={item.imageUrl} 
+                alt={item.title} 
+                className="item-image" 
+                onError={(e) => { e.target.onerror = null; e.target.src="https://i.imgur.com/QNtHkAI.png" }}
+            />
+            <div className="item-content">
+                <p className="item-title">{item.title}</p>
+                <p className="item-price">${item.price}</p>
+                <p className="item-description">{item.description}</p>
+                <p className="item-co2">🍃 Est. {item.co2_saved ? item.co2_saved.toFixed(1) : 0} kg CO2 saved!</p>
+            </div>
+            <button className="buy-button" onClick={handleBuyClick}>Contact Seller</button>
         </div>
     );
 }

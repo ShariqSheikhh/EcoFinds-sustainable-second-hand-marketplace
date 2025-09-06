@@ -1,0 +1,49 @@
+// frontend/src/components/LoginPage.js
+import React, { useState } from 'react';
+
+const formStyle = { display: 'flex', flexDirection: 'column', maxWidth: '500px', margin: '2rem auto', padding: '2rem', border: '1px solid #ddd', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)'};
+const inputStyle = { marginBottom: '1rem', padding: '0.5rem', fontSize: '1rem', borderRadius: '4px', border: '1px solid #ccc' };
+const buttonStyle = { padding: '0.75rem', fontSize: '1rem', backgroundColor: '#28a745', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer' };
+
+function LoginPage({ setPage }) {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            const response = await fetch('http://localhost:3001/api/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || 'Invalid credentials');
+            }
+
+            // IMPORTANT: Save the token from the backend
+            localStorage.setItem('token', data.token);
+
+            alert('Login successful!');
+            setPage('home'); // Go to the homepage after login
+
+        } catch (error) {
+            console.error('Login error:', error);
+            alert(`Login failed: ${error.message}`);
+        }
+    };
+
+    return (
+        <form style={formStyle} onSubmit={handleSubmit}>
+            <h2>Login to Your Account</h2>
+            <input type="email" placeholder="Email" style={inputStyle} value={email} onChange={e => setEmail(e.target.value)} required />
+            <input type="password" placeholder="Password" style={inputStyle} value={password} onChange={e => setPassword(e.target.value)} required />
+            <button type="submit" style={buttonStyle}>Login</button>
+        </form>
+    );
+}
+
+export default LoginPage;

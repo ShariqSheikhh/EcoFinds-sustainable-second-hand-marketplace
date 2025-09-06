@@ -1,51 +1,26 @@
+// backend/index.js
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const db = require('./db.js');
+const helmet = require('helmet');
+const morgan = require('morgan');
+
+const authRoutes = require('./routes/auth');
+const itemRoutes = require('./routes/items'); // <-- Import our new item routes
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
+// Middleware
 app.use(cors());
+app.use(helmet());
+app.use(morgan('dev'));
 app.use(express.json());
 
-// This block gets all the items to display on the homepage
-app.get("/api/items", (req, res) => {
-    const sql = "SELECT * FROM items ORDER BY createdAt DESC";
-    db.all(sql, [], (err, rows) => {
-        if (err) {
-            return res.status(400).json({ "error": err.message });
-        }
-        res.json({
-            "message": "success",
-            "data": rows
-        });
-    });
-});
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/items', itemRoutes); // <-- Tell Express to use our item routes
 
-// This NEW block handles the data from your "List an Item" form
-app.post("/api/items", (req, res) => {
-    const { title, description, price, sellerId } = req.body;
-
-    if (!title || !price || !sellerId) {
-        return res.status(400).json({ "error": "Missing required fields" });
-    }
-
-    const sql = 'INSERT INTO items (title, description, price, sellerId) VALUES (?,?,?,?)';
-    const params = [title, description, price, sellerId];
-
-    db.run(sql, params, function(err, result) {
-        if (err) {
-            return res.status(400).json({ "error": err.message });
-        }
-        res.status(201).json({
-            "message": "success",
-            "data": { id: this.lastID }
-        });
-    });
-});
-
-
-// This block starts the server
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
