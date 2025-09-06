@@ -68,6 +68,6 @@ Follow these instructions to get the project running on your local machine.
 * [✅] Clean, centered, and responsive card-based UI.
 * [✅] Proper use of version control with a `.gitignore` file.
 
-## Team
+## Team: TechByte
 
 * Shariq Sheikh
