@@ -32,5 +32,5 @@ In today’s world, overconsumption and fast fashion lead to massive waste gener
 
 ---
 
-## 👨‍💻 Team TechBulls  
+## 👨‍💻 Team TechByte  
 *Hackathon Project Submission for Odoo x NMIT Hackathon 2025*  
