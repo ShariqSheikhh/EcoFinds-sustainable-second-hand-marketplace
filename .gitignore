@@ -1,0 +1,14 @@
+# Dependencies
+node_modules/
+
+# Database
+# We don't want to commit our test database
+db.sqlite
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
