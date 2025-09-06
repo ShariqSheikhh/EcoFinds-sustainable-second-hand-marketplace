@@ -70,6 +70,4 @@ Follow these instructions to get the project running on your local machine.
 
 ## Team
 
-* [Your Name]
-* Windsurf
-* Gemini (AI Teammate)
+* Shariq Sheikh
